@@ -2,15 +2,26 @@ console.log("it's on");
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function(details) {
-		var newUrl = '';
-		switch (details.url) {
-			// urls that are not exact match
-			case "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js":
-				newUrl = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.19/angular.min.js";	// angularjs -> angular.js
+		var oldUrl = details.url;
+		// parse the old one
+		var mark = "libs/";
+		var target = oldUrl.substring(oldUrl.indexOf(mark) + mark.length);
+		console.log(target);
+		var parts = target.split("/");
+		var lib = parts[0];
+		var ver = parts[1];
+		var file = parts[2];
+		console.log(parts);
+		//
+		var newLib = '';
+		switch (lib) {
+			case "angularjs":
+				newLib = "angular.js";
 				break;
 			default:
-				newUrl = "https://cdnjs.cloudflare.com" + details.url.substring(details.url.indexOf(".com") + 4);
+				newLib = lib;
 		}
+		var newUrl = "https://cdnjs.cloudflare.com/ajax/libs/" + newLib + "/" + ver + "/" + file;
 		console.log("Switch URL to " + newUrl);
 		return { redirectUrl: newUrl };
 	},
