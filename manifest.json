@@ -2,8 +2,8 @@
   "manifest_version": 2,  // fixed
 
   "name": "Google APIs Redirect (To CDN)",
-  "version": "0.0.1",
-  "description": "Redirect request to ajax.googleapis.com to another accessible cdn server.",
+  "version": "0.0.2",
+  "description": "Redirect request to ajax.googleapis.com to another accessible cdn server (and cancel all fonts requests).",
 
   "permissions": [
     "<all_urls>",

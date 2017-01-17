@@ -39,3 +39,14 @@ chrome.webRequest.onBeforeRequest.addListener(
   ]},
   ['blocking']
 )
+
+chrome.webRequest.onBeforeRequest.addListener(
+  function (details) {
+    console.log('Requesting', details.url)
+    return { cancel: true }
+  },
+  {urls: [
+    '*://fonts.googleapis.com/*'
+  ]},
+  ['blocking']
+)
